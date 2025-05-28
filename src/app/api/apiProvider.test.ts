@@ -22,6 +22,7 @@ describe("apiProvider", () => {
       email: "Shanna@melissa.tv",
     },
   ];
+
   const mockPosts: Post[] = [
     {
       userId: 1,
@@ -37,6 +38,13 @@ describe("apiProvider", () => {
       body: "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
     },
   ];
+
+  const mockUser: User = {
+    id: 1,
+    name: "Leanne Graham",
+    username: "Bret",
+    email: "Sincere@april.biz",
+  };
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -84,6 +92,33 @@ describe("apiProvider", () => {
       mockedAxios.get.mockRejectedValue(new Error(err));
 
       await expect(apiProvider.fetchPostById(usersUrl, userId)).rejects.toThrow(
+        err
+      );
+      expect(mockedAxios.get).toHaveBeenCalledWith(usersUrl + userId);
+    });
+  });
+
+  describe("fetchUserById", () => {
+    it("should fetch users successfully", async () => {
+      mockedAxios.get.mockResolvedValue({ data: mockUser });
+
+      const usersUrl = "https://jsonplaceholder.typicode.com/users/";
+      const userId = 1;
+
+      const result = await apiProvider.fetchUserById(usersUrl, userId);
+
+      expect(result).toEqual(mockUser);
+      expect(mockedAxios.get).toHaveBeenCalledWith(usersUrl + userId);
+    });
+
+    it("should user by id with an err", async () => {
+      const err = "error";
+
+      const usersUrl = "https://jsonplaceholder.typicode.com/users/";
+      const userId = 1;
+      mockedAxios.get.mockRejectedValue(new Error(err));
+
+      await expect(apiProvider.fetchUserById(usersUrl, userId)).rejects.toThrow(
         err
       );
       expect(mockedAxios.get).toHaveBeenCalledWith(usersUrl + userId);
