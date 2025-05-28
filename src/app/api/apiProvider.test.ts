@@ -2,7 +2,6 @@ import axios from "axios";
 import { User } from "../types/User";
 import { Post } from "../types/Post";
 import { apiProvider } from "./apiProvider";
-import { url } from "inspector";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
