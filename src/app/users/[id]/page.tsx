@@ -12,7 +12,7 @@ export default async function User({ params }: { params: { id: number } }) {
 
   return (
     <>
-      {params.id ? (
+      {params?.id ? (
         <HydrationBoundary state={dehydrate(queryClient)}>
           <UserClient id={params.id} />
         </HydrationBoundary>

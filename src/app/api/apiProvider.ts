@@ -20,6 +20,7 @@ export const apiProvider = {
       throw err;
     }
   },
+
   fetchPostById: async (url: string, id: number) => {
     try {
       const data = await axios.get<Post[]>(url + id);
