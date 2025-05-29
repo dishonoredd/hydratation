@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { CustomQueryClientProvider } from "./quryclient";
+import { CustomQueryClientProvider } from "./components/quryclient";
 
 const montserrat = Montserrat({
   variable: "--font-geist-sans",
